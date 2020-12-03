@@ -103,9 +103,10 @@ async function start() {
                 }
                 await sleep(API_SLEEP_TIME)
             }
-            await sleep(SLEEP_TIME)
         } catch (error) {
             console.error(error)
+        } finally {
+            await sleep(SLEEP_TIME)
         }
     }
 }
