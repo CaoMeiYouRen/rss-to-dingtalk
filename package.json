@@ -1,6 +1,6 @@
 {
   "name": "rss-to-dingtalk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "author": "CaoMeiYouRen",
   "description": "转发rss到钉钉",
