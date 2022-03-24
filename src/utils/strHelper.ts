@@ -10,7 +10,7 @@
  */
 export function getImgSrc(content: string): string[] {
     const res = content.matchAll(/src="(.*?)"/g)
-    return [...res].map(e => e[1])
+    return [...res].map((e) => e[1])
 }
 
 /**
@@ -24,7 +24,7 @@ export function getImgSrc(content: string): string[] {
  */
 export function replaceImageSrc(content: string) {
     const res = content.matchAll(/<img(.*?)>/g)
-    const imgs = [...res].map(e => e[0]).map(e => {
+    const imgs = [...res].map((e) => e[0]).map((e) => {
         const f = e.match(/src="(.*?)"/)
         const src = f && f[1]
         return {
@@ -32,7 +32,7 @@ export function replaceImageSrc(content: string) {
             src: `![](${src})`,
         }
     })
-    imgs.forEach(e => {
+    imgs.forEach((e) => {
         content = content.replace(e.img, e.src)
     })
     return content
@@ -48,7 +48,7 @@ export function replaceImageSrc(content: string) {
  */
 export function replaceASrc(content: string) {
     const res = content.matchAll(/<a(.*?)>/g)
-    const imgs = [...res].map(e => e[0]).map(e => {
+    const imgs = [...res].map((e) => e[0]).map((e) => {
         const f = e.match(/href="(.*?)"/)
         const src = f && f[1]
         return {
@@ -56,7 +56,7 @@ export function replaceASrc(content: string) {
             src: `${src} `,
         }
     })
-    imgs.forEach(e => {
+    imgs.forEach((e) => {
         content = content.replace(e.img, e.src || e.img)
     })
     return content

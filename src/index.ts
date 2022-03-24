@@ -13,10 +13,14 @@ import store from './utils/store'
 import { API_SLEEP_TIME, SLEEP_TIME } from './config'
 
 async function getSubscribeList() {
-    return (await fs.readFile('subscribeList.txt', 'utf-8')).split(/\n/).map(e => e.trim()).filter(e => !!e)
+    return (await fs.readFile('subscribeList.txt', 'utf-8'))
+        .split(/\n/)
+        .map((e) => e.trim())
+        .filter((e) => !!e)
+        .filter((e) => !e.startsWith('#')) // 过滤掉开头为 # 号的
 }
 
-function rssFormat(rss: Parser.Output) {
+function rssFormat(rss: Parser.Output<any>) {
     const title = `检测到【 ${rss.title} 】有更新`
     const lastItem = rss.items && rss.items[0]
     if (!lastItem) {
@@ -85,7 +89,7 @@ async function start() {
         await fs.writeFile('data/lastDate.json', JSON.stringify({}, null, 4))
     } else {
         const lastDate = await fs.readJSON('data/lastDate.json')
-        Object.keys(lastDate).forEach(key => {
+        Object.keys(lastDate).forEach((key) => {
             store.set(key, lastDate[key])
         })
     }
